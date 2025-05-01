@@ -1,5 +1,5 @@
 name: armonia_meteo
-description: "A new Flutter project."
+description: "App di meditazione che si adatta alle condizioni meteorologiche"
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,6 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.2.1  # Per le chiamate API
+  geolocator: ^10.1.0  # Per la geolocalizzazione
+  flutter_dotenv: ^5.1.0  # Per gestire le API keys
+  provider: ^6.1.1  # Per la gestione dello stato
+  just_audio: ^0.9.36  # Per la riproduzione audio
+  shared_preferences: ^2.2.2  # Per salvare le preferenze locali
+  flutter_animate: ^4.5.0  # Per animazioni
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +24,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/audio/
+    - assets/images/
+    - .env
