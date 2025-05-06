@@ -1,17 +1,16 @@
 // lib/providers/music_provider.dart
 import 'package:flutter/material.dart';
-import '../models/sound_synthesis_model.dart';
 import '../services/ai_synthesis_service.dart';
 import '../models/weather_model.dart';
 
 class MusicProvider extends ChangeNotifier {
   final AISynthesisService _synthesisService = AISynthesisService();
-  SoundSynthesisParams? _synthesisParams;
+  Map<String, dynamic>? _musicParams;
   bool _isPlaying = false;
   bool _isLoading = false;
   String _currentMusicDescription = '';
   
-  SoundSynthesisParams? get synthesisParams => _synthesisParams;
+  Map<String, dynamic>? get musicParams => _musicParams;
   bool get isPlaying => _isPlaying;
   bool get isLoading => _isLoading;
   String get currentMusicDescription => _currentMusicDescription;
@@ -21,14 +20,17 @@ class MusicProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       
-      // Converti i dati meteo in parametri di sintesi musicale
-      _synthesisParams = _synthesisService.mapWeatherToSynthesis(weatherData);
+      // Converti i dati meteo in parametri musicali
+      _musicParams = _synthesisService.mapWeatherToMusic(weatherData);
       
       // Descrivi la musica che verrà generata
-      _currentMusicDescription = _generateMusicDescription(_synthesisParams!, weatherData);
+      _currentMusicDescription = _synthesisService.generateMusicDescription(
+        _musicParams!, 
+        weatherData
+      );
       
       // Avvia la generazione e riproduzione
-      await _synthesisService.startGenerating(_synthesisParams!, durationMinutes);
+      await _synthesisService.startGenerating(_musicParams!, durationMinutes);
       
       _isPlaying = true;
     } catch (e) {
@@ -37,51 +39,6 @@ class MusicProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-  }
-  
-  String _generateMusicDescription(SoundSynthesisParams params, WeatherData weather) {
-    String mood = '';
-    String tempo = '';
-    String texture = '';
-    
-    // Descrizione umore basata su waveType e brightness
-    if (params.waveType == 'sine' && params.brightness > 0.6) {
-      mood = 'luminosa';
-    } else if (params.waveType == 'sine') {
-      mood = 'serena';
-    } else if (params.waveType == 'triangle' && params.reverb > 0.6) {
-      mood = 'contemplativa';
-    } else if (params.waveType == 'triangle') {
-      mood = 'riflessiva';
-    } else if (params.waveType == 'sawtooth') {
-      mood = 'intensa';
-    } else {
-      mood = 'avvolgente';
-    }
-    
-    // Descrizione tempo basata sul parametro tempo
-    if (params.tempo < 70) {
-      tempo = 'lenta';
-    } else if (params.tempo < 100) {
-      tempo = 'moderata';
-    } else {
-      tempo = 'vivace';
-    }
-    
-    // Descrizione texture basata su harmonicity e resonance
-    if (params.harmonicity > 0.7 && params.resonance < 0.4) {
-      texture = 'eterea';
-    } else if (params.harmonicity > 0.6) {
-      texture = 'armoniosa';
-    } else if (params.resonance > 0.7) {
-      texture = 'profonda';
-    } else if (params.modulation > 0.7) {
-      texture = 'dinamica';
-    } else {
-      texture = 'rilassante';
-    }
-    
-    return 'Musica $mood, $texture con melodia $tempo generata in base a ${weather.condition.toLowerCase()} a ${weather.temperature.toStringAsFixed(1)}°C';
   }
   
   Future<void> togglePlayPause() async {
