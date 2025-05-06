@@ -57,14 +57,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           Icon(Icons.cloud, size: 80, color: Colors.white),
           const SizedBox(height: 10),
-          Text(
-            'Nuvoloso',
-            style: TextStyle(fontSize: 24, color: Colors.white),
-          ),
-          Text(
-            '22°C',
-            style: TextStyle(fontSize: 48, color: Colors.white),
-          ),
+          Text('Nuvoloso', style: TextStyle(fontSize: 24, color: Colors.white)),
+          Text('22°C', style: TextStyle(fontSize: 48, color: Colors.white)),
         ],
       ),
     );
@@ -109,7 +103,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // In _buildStartButton() di HomeScreen
+  // In lib/screens/home_screen.dart, modifichiamo la funzione _buildStartButton
   Widget _buildStartButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
@@ -120,7 +114,17 @@ class HomeScreen extends StatelessWidget {
           ),
         );
       },
-      // ... resto del codice rimane invariato
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.blue,
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
+      child: const Text(
+        // Aggiunto il parametro child richiesto
+        'Inizia Meditazione',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }
