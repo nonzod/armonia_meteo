@@ -10,10 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.1  # Per le chiamate API
-  geolocator: ^10.1.0  # Per la geolocalizzazione
+  geolocator: ^14.0.0  # Per la geolocalizzazione
   flutter_dotenv: ^5.1.0  # Per gestire le API keys
   provider: ^6.1.1  # Per la gestione dello stato
-  just_audio: ^0.9.36  # Per la riproduzione audio
+  just_audio: ^0.10.2  # Per la riproduzione audio
   shared_preferences: ^2.2.2  # Per salvare le preferenze locali
   flutter_animate: ^4.5.0  # Per animazioni
 

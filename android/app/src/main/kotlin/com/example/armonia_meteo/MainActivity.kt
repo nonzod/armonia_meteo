@@ -1,4 +1,4 @@
-package com.example.armonia_meteo
+package it.nicolatomassoni.armoniameteo
 
 import io.flutter.embedding.android.FlutterActivity
 
