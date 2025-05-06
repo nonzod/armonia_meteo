@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'providers/weather_provider.dart';
 
 void main() {
-  runApp(const ArmoniaMeteoApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => WeatherProvider()),
+      ],
+      child: const ArmoniaMeteoApp(),
+    ),
+  );
 }
 
 class ArmoniaMeteoApp extends StatelessWidget {
