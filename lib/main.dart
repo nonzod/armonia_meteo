@@ -1,13 +1,16 @@
+// lib/main.dart (modificato)
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'providers/weather_provider.dart';
+import 'providers/music_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(create: (_) => MusicProvider()),
       ],
       child: const ArmoniaMeteoApp(),
     ),

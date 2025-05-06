@@ -16,6 +16,9 @@ dependencies:
   just_audio: ^0.10.2  # Per la riproduzione audio
   shared_preferences: ^2.2.2  # Per salvare le preferenze locali
   flutter_animate: ^4.5.0  # Per animazioni
+  audioplayers: ^6.4.0      # Per la sintesi audio
+  soundpool: ^2.4.1         # Per campioni audio a bassa latenza
+  path_provider: ^2.1.5     # Per gestire file temporanei
 
 dev_dependencies:
   flutter_test:
